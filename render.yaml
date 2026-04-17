@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: fintrack-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    healthCheckPath: /api/status
+
+  - type: web
+    name: fintrack-frontend
+    env: docker
+    dockerfilePath: frontend/Dockerfile
+    dockerContext: frontend
+    plan: free
+    envVars:
+      - key: API_URL
+        value: https://fintrack-backend.onrender.com
