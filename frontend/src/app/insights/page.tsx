@@ -15,7 +15,7 @@ import {
 const primaryInsights = [
   {
     title: "Projected Savings",
-    value: "$1,240.25",
+    value: "₹1,240.25",
     description: "by the end of October",
     icon: TrendingUp,
     color: "text-emerald-400"
@@ -75,7 +75,7 @@ export default function InsightsPage() {
             {[
               {
                 title: "Cancel Underused Subscription",
-                desc: "We noticed you haven't used your 'Music Premium' subscription in 45 days. Canceling could save you $120/year.",
+                desc: "We noticed you haven't used your 'Music Premium' subscription in 45 days. Canceling could save you ₹120/year.",
                 impact: "High Impact"
               },
               {
@@ -85,7 +85,7 @@ export default function InsightsPage() {
               },
               {
                 title: "Refinance Opportunity",
-                desc: "Current interest rates are 0.5% lower than your recorded loan rate. Refinancing could save $45/mo.",
+                desc: "Current interest rates are 0.5% lower than your recorded loan rate. Refinancing could save ₹45/mo.",
                 impact: "Expert Level"
               }
             ].map((rec, idx) => (

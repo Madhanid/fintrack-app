@@ -19,17 +19,19 @@ RUN npm run build
 FROM node:20-alpine
 
 WORKDIR /app
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/next.config.js ./
-# Copy public folder if it exists, and other necessary assets
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Copy standalone build and static assets
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/src ./src
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/src/cron ./src/cron
 
 EXPOSE 3000
 
-ENV NODE_ENV=production
-ENV API_URL=http://backend:8080
-
-CMD ["npm", "start"]
+# Start both cron and the standalone server
+# Note: In production, standalone output uses 'server.js' instead of 'next start'
+CMD node src/cron/emailCron.js & node server.js

@@ -67,7 +67,7 @@ export default function ScannerPage() {
                   </div>
                   <div className="flex justify-between mb-2">
                     <span className="text-xs text-gray-500">Amount</span>
-                    <span className="text-xs font-bold text-neonPink">${captured.amount}</span>
+                    <span className="text-xs font-bold text-neonPink">₹{captured.amount}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-xs text-gray-500">Confidence</span>
@@ -135,7 +135,7 @@ export default function ScannerPage() {
                     <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Processed • Oct 2{i}, 2023</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-bold text-white">$24.99</p>
+                    <p className="text-sm font-bold text-white">₹24.99</p>
                     <p className="text-[10px] text-emerald-400 font-bold uppercase">Success</p>
                   </div>
                 </div>
