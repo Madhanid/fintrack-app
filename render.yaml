@@ -15,4 +15,4 @@ services:
     plan: free
     envVars:
       - key: API_URL
-        value: https://fintrack-backend.onrender.com
+        value: https://fintrack-app-cff9.onrender.com
