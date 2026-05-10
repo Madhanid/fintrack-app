@@ -50,8 +50,14 @@ export default function ScannerPage() {
   }, []);
 
   useEffect(() => {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || `ws://${window.location.hostname}:8080/ws`;
+    // Derive WS URL from environment or production backend
+    const prodWsUrl = 'wss://fintrack-backend-llhf.onrender.com/ws';
+    const localWsUrl = `ws://${window.location.hostname}:8080/ws`;
+    
+    // If we're on a production domain (not localhost), use the production backend
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || (isLocal ? localWsUrl : prodWsUrl);
+
     const socket = new WebSocket(wsUrl);
     
     socket.onopen = () => console.log('WebSocket connection established for Scanner');

@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   async rewrites() {
-    // Force proxy to the internal docker backend
-    const apiUrl = process.env.API_URL || 'http://backend:8080';
+    // Force proxy to the internal docker backend or production URL
+    const apiUrl = process.env.API_URL || 'https://fintrack-backend-llhf.onrender.com';
     return [
       {
         source: '/api/:path*',

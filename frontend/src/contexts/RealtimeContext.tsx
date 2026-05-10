@@ -66,10 +66,13 @@ export const RealtimeProvider = ({ children }: { children: ReactNode }) => {
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
-    // Derive WS URL from current location
-    const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const wsHost = window.location.hostname;
-    const wsUrl = `${wsProtocol}://${wsHost}:8080/ws`;
+    // Derive WS URL from environment or production backend
+    const prodWsUrl = 'wss://fintrack-backend-llhf.onrender.com/ws';
+    const localWsUrl = `ws://${window.location.hostname}:8080/ws`;
+    
+    // If we're on a production domain (not localhost), use the production backend
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || (isLocal ? localWsUrl : prodWsUrl);
 
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
